@@ -114,11 +114,13 @@ class Booking extends Model
         
     }
     
-    public static function schedule()
+    public static function schedule($id)
     {
-        $bookings = Booking::whereHas('car', function($q){
-        $q->where('admin_id', Auth::id());
-        })->get();
+        if ($id == "user") return Booking::where('user_id', Auth::id())->orderBy('date', 'asc')->get();
+        
+        $bookings = Booking::whereHas('Car', function($q){
+            $q->where('admin_id', Auth::id());
+        })->orderBy('date', 'asc')->get();
         
         return $bookings;
     }

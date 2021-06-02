@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function schedule()
     {
-        $bookings = Booking::schedule();
+        $bookings = Booking::schedule("admin");
         $page = Booking::paginate(5);
         
         return view('admin.schedule', ['bookings' => $bookings, 'page' => $page]);
