@@ -41,7 +41,7 @@ class UserController extends Controller
     
     public function schedule()
     {
-        $bookings = Booking::where('user_id', Auth::id())->get();
+        $bookings = Booking::where('user_id', Auth::id())->orderBy('date', 'asc')->get();
         
         return view('user.schedule', ['bookings' => $bookings]);
     }
