@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">配送内容確認</div>
                     <div class="card-body">
-                        <form action="{{ action('UserController@confirmDataSave') }}" method="post" enctype='multipart/form-data'>
+                        <form name="form1" action="{{ action('UserController@confirmDataSave') }}" method="post" enctype='multipart/form-data'>
                         {{ csrf_field() }}
                             <table class="table">
                                 <tr>
@@ -24,7 +24,25 @@
                                     <input type="hidden" name="delivery_area" value="{{ $conditionList['delivery_area'] }}" />
                                 </tr>
                             </table>
-                            <input type="submit" value="確定する" class="submit">
+                            <h4>注意事項</h4>
+                            <p>・当日の状況次第で高速料金が追加される可能性があります</p>
+                            <p>・入船遅れにより当日配送不可となった場合キャンセル料が発生する可能性があります</p>
+                            <input id="Checkbox1" type="checkbox" />注意事項について確認しました<br>
+                            <input id="evtarget" type="submit" value="確定する">
+                            <script>
+                              //  id = 'evtarget' のタグにクリックイベントを設定
+                                var target = document.getElementById('evtarget');
+                                target.addEventListener('click', chk_value, false);
+                            
+                                function chk_value(event) {
+                                //  チェックボックスの値を取得
+                                    var chkflg = document.form1.Checkbox1.checked;
+                                    if (chkflg == false) {
+                                        event.preventDefault();
+                                        alert('注意事項について確認してください');
+                                    }
+                                }
+                            </script>
                         </form>
                     </div>
                 </div>
